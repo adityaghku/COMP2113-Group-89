@@ -48,3 +48,11 @@ The game we are trying to create is an electronic version of blackjack. In this 
 
 
 #### References
+
+___________
+
+#### INTERNAL QUESTIONS AND COMMENTS
+- add insurance? add split? add double?
+- If we add split will we do resplits?
+
+'Data structures for storing game status' --> i think this is referring to in-game status
