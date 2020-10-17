@@ -1,6 +1,5 @@
 # Group 89
-## Aditya Gupta - 3035662297
-## Aayush Batwara - 
+## Aditya Gupta - 3035662297 & Aayush Batwara - 
 
 The game we are trying to create is an electronic version of blackjack. In this game, the player can play the game blackjack against the dealer, choosing their own bet amount to try and win as much money as possible against the casino. 
 
