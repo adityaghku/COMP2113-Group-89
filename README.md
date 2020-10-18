@@ -29,22 +29,22 @@ The game we are trying to create is an electronic version of blackjack. In this 
 
 ### Features and Functions vis-a-vis given code requirements
 
-#### Generation of random game sets or events
+### 1. Generation of random game sets or events
     • Each hand dealt to the user and dealer will always be random, but each card must be unique. Functions like DrawCard() and immutable arrays like Deck which need to be shuffled randomly and distributed randomly are required.
-#### Data structures for storing game status
+### 2. Data structures for storing game status
     • Can use a combination of pass by reference vs pass by value to alter the game status as the game progresses.
     • There will be a centralized function which will call secondary functions to run the different parts of the game - for example, main() will begin the game but DrawCard() will help draw the cards and EvaluateWinner() will evaluate the winner.
     • A Deck class will be used, and in each round a new instance of that class will be created. Functions such as DealCards() and ShuffleCards() will be part of this class. 
     • An array will hold the player data, key, and their running cash amount.
-#### Dynamic memory management
+### 3. Dynamic memory management
     • Pointers and Dynamic Memory Management will be used primarily in the operations relating to the deck.
     • The deck values will be stored in an array which will be retrieved using pointers.
     • Pass by values will be used to alter the game status. For example, current cash will be updated depending on a win or a loss using pass by reference.
-#### File input/output (e.g., for loading/saving game status)
+### 4. File input/output (e.g., for loading/saving game status)
     • Each new user will be given a random alphanumeric code of 6 digits which will be their ‘key’.
     • The game will autosave after each round. The game will save the name and amount of money that they have at any given time so that they can return.
     • User can load the game by inputting their ‘key’ after launching the program.
-#### Program codes in multiple files
+### 5. Program codes in multiple files
     • The program code will be separated into multiple front end and back end files of .h and .cpp. Examples include Main.h, Main.cpp, Deck.h, and Deck.cpp.
 
 #### References
