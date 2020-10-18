@@ -30,10 +30,10 @@ The game we are trying to create is an electronic version of blackjack. In this 
 
 ### Features and Functions vis-a-vis given code requirements
 
-#### Generation of random game sets or events
+Generation of random game sets or events
     - Each hand dealt to the user and dealer will always be random, but each card must be unique. Would need functions like DrawCard() and immutable arrays like Deck which need to be shuffled randomly and distributed randomly
 #### Data structures for storing game status
-    - Can use a combination of pass by reference vs pass by value to alter the game status as the game progresses
+1. Can use a combination of pass by reference vs pass by value to alter the game status as the game progresses
     - There will be a centralized function which will call secondary functions to run the different parts of the game - e.g. main() will begin the game but DrawCard() will help draw the cards and EvaluateWinner() will evaluate the winner
 #### Dynamic memory management
     - Pointers and Dynamic Memory Management will be used primarily in the operations relating to the deck
