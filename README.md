@@ -46,6 +46,7 @@ The game we are trying to create is an electronic version of blackjack. In this 
     • User can load the game by inputting their ‘key’ after launching the program.
 ### 5. Program codes in multiple files
     • The program code will be separated into multiple front end and back end files of .h and .cpp. Examples include Main.h, Main.cpp, Deck.h, and Deck.cpp.
+    • We will use makefile to link up the relevant file dependencies based on how the files are divided in the final project.
 
 #### References
 https://www.contrib.andrew.cmu.edu/~gc00/reviews/pokerrules
