@@ -29,38 +29,43 @@ int main(){
     displayInstructions()
   }
 
-  cout << "Begin game" << endl;//Do you want to start game?
+  cout << "Begin game" << endl;
   createDeck(&deck); //Adds cards to array in sequential order
-
 
   while(istrue){
     cout << "How much do you want to bet (in an increment of 10)" << endl; //bet amount
     cin >> currentbet;
     purse-=currentbet; //for user board display
 
-    shuffleDeck(&deck) //shuffles the deck
-    dealCards(deck,&playerCards,&dealerCards,&cardnumber) //Deals the cards to the player and the dealer
+    shuffleDeck(&deck); //shuffles the deck
+    dealCards(deck,&playerCards,&dealerCards,&cardnumber); //Deals the cards to the player and the dealer
 
-    PrintBoard(purse,currentbet,playerCards,dealerCards) //Prints table for user visual appeal
+    PrintBoard(purse,currentbet,playerCards,dealerCards); //Prints table for user visual appeal
 
     if blackjack(playerCards){ //checking if the player has blackjack
       purse+=2.5*currentbet;
       cout << "You have blackjack" << endl;
+      PrintBoard(purse,currentbet,playerCards,dealerCards);
       didyouwin=true;
     }
     else{
-      cout << "Hit stand or double" << endl; //Players turn
-      char move;
-      cin >> move;
-      User(&playerCards,deck,cardnumber,move);
-      PrintBoard(purse,currentbet,playerCards,dealerCards);
 
-      Dealer(&dealerCards,deck,cardnumber); //Dealers Turn
-      PrintBoard(purse,currentbet,playerCards,dealerCards);
+      bool yourTurn=true,dealerTurn=true;
+      while(yourTurn){
+        cout << "What move will you make? H, S or D." << endl; //Players turn
+        char move;
+        cin >> move;
 
+        User(&playerCards,deck,&cardnumber,move,&yourTurn); //Has moves and Printboard inside it, updates yourTurn on every move
+      }
+
+      while(dealerTurn){
+        Dealer(&dealerCards,deck,&cardnumber,&dealerTurn); //Dealers Turn has PrintBoard inside it
+      }
     }
+
     if(YouWon(playerCards,dealerCards)){ //Determine winner of game
-      didyouwin=true
+      didyouwin=true;
     }
 
     if(didyouwin){ //Update bet amount of the player
@@ -68,10 +73,13 @@ int main(){
       cout << "You win" << endl;
       PrintBoard(purse,currentbet,playerCards,dealerCards);
     }
+
     else{
       cout << "You lose" << endl;
       PrintBoard(purse,currentbet,playerCards,dealerCards);
     }
+
+    updateUsers(playerdata); //update users.txt
 
     if(purse==0){
       cout << "You have no more money left, you lose" << endl; //Money check condition
@@ -84,8 +92,6 @@ int main(){
     if(continue=='N'){
       istrue=false;
     }
-    //update users.txt
-
   }
 
   if(purse!=0){
