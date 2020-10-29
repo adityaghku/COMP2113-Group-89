@@ -6,21 +6,28 @@ int main(){
 
   bool istrue=true,didyouwin=false;
   int purse,currentbet,cardnumber=0;
-  array playerdata[3]; //Need to edit???
-  str name,key,playerCards[15],dealerCards[15],deck[52];
+
+  struct playerData{
+    string name;
+    int purse;
+    string key;
+  };
+
+  playerData P = { };
+
+  str playerCards[15],dealerCards[15],deck[52];
 
   cout << "Load game or New?" << endl; //Load Game or New Game
 
   cout << "What is your name?" << endl;
   cin >> name; //Initialise the Cash, name, and key
-  playerdata[0]=name;
 
   generateKey(&key) //Make key only alphabets for simplicity
-  playerdata[2]=key;
 
   cout << "How much money do you want to buy-in?" << endl;
   cin >> purse;
-  playerdata[1]=purse;
+
+  playerData playerdata = {name, purse, key};
 
   cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
   char instructions;
@@ -79,7 +86,7 @@ int main(){
       PrintBoard(purse,currentbet,playerCards,dealerCards);
     }
 
-    updateUsers(playerdata); //update users.txt
+    updateUsers(playerdata.); //update users.txt
 
     if(purse==0){
       cout << "You have no more money left, you lose" << endl; //Money check condition
@@ -95,7 +102,7 @@ int main(){
   }
 
   if(purse!=0){
-    cout << player[3] << " is the key";
+    cout << playerdata.key << " is the key";
   }
 
   return 0;
