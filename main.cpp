@@ -2,16 +2,20 @@
 #include <string>
 using namespace std;
 
+struct playerData{
+  string name;
+  int purse;
+  string key;
+
+  int wins;
+  int gamesPlayed; //Stats
+  int winPercentage;
+};
+
 int main(){
 
   bool istrue=true,didyouwin=false;
   int purse,currentbet,cardnumber=0;
-
-  struct playerData{
-    string name;
-    int purse;
-    string key;
-  };
 
   playerData P = { };
 
@@ -27,7 +31,7 @@ int main(){
   cout << "How much money do you want to buy-in?" << endl;
   cin >> purse;
 
-  playerData playerdata = {name, purse, key};
+  playerData playerdata[i] = {name, purse, key};
 
   cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
   char instructions;
