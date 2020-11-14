@@ -2,16 +2,6 @@
 #include <string>
 using namespace std;
 
-struct playerData{
-  string name;
-  int purse;
-  string key;
-
-  int wins;
-  int gamesPlayed; //Stats
-  int winPercentage;
-};
-
 int main(){
 
   bool istrue=true,didyouwin=false;
@@ -22,16 +12,27 @@ int main(){
   str playerCards[15],dealerCards[15],deck[52];
 
   cout << "Load game or New?" << endl; //Load Game or New Game
+  string choice;
+  cin >> choice;
 
-  cout << "What is your name?" << endl;
-  cin >> name; //Initialise the Cash, name, and key
+  if (choice == "Load"){
+    cout << "Please enter your key: " << endl;
+    string inputkey;
+    cin >> inputkey;
+    loadGame(inputkey);
+  }
 
-  generateKey(&key) //Make key only alphabets for simplicity
+  else{
+    cout << "What is your name?" << endl;
+    cin >> name; //Initialise the Cash, name, and key
 
-  cout << "How much money do you want to buy-in?" << endl;
-  cin >> purse;
+    generateKey(&key) //Make key only alphabets for simplicity
 
-  playerData playerdata[i] = {name, purse, key};
+    cout << "How much money do you want to buy-in?" << endl;
+    cin >> purse;
+
+    playerData playerdata[i] = {name, purse, key};
+  }
 
   cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
   char instructions;
@@ -90,7 +91,7 @@ int main(){
       PrintBoard(purse,currentbet,playerCards,dealerCards);
     }
 
-    updateUsers(playerdata.); //update users.txt
+    updateUsers(playerdata); //update users.txt
 
     if(purse==0){
       cout << "You have no more money left, you lose" << endl; //Money check condition
