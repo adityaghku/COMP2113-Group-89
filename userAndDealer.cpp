@@ -26,6 +26,18 @@ int readScore(string cards[]){
     else if(tempRank=='7')score+=7; else if(tempRank=='8')score+=8; else if(tempRank=='9')score+=9;
     else score+= 10;
   }
+  int numberOfAces = 0;
+  for (size_t i = 0; i < maxIndex; i++) {
+    if (cards[i][0] == 'A') {
+      numberOfAces += 1;
+      score += 10;
+    }
+  }
+  for (size_t i = 0; i < numberOfAces; i++) {
+    if (score > 21) {
+      score -= 10;
+    }
+  }
   return score;
 }
 
@@ -56,6 +68,26 @@ bool User(string userCards[], string deck[], int &topCardIndex,int &userScore){
   return true;
 }
 
+int Dealer(string dealerCards[], string deck[], int &topCardIndex,int &dealerScore, int userScore){
+  cout << "Dealer's cards: ";
+
+  for (size_t i = 0; i < findNumberofCards(dealerCards); i++) {
+    cout << dealerCards[i] << ", ";
+  }
+  // if user has 21 or above, then dealer's turn is over
+  if (userScore >= 21) return 0;
+
+  // while dealer score less that 17, dealer must Hit
+  while (readScore(dealerCards) < 17) {
+    dealerCards[findNumberofCards(dealerCards)] = deck[topCardIndex];
+    topCardIndex += 1;
+    dealerScore = readScore(dealerCards);
+    cout << endl << "dealer's cards: ";
+    for (size_t i = 0; i < findNumberofCards(dealerCards); i++) {
+      cout << dealerCards[i] << ", ";
+    }
+  }
+}
 
 int main(){
   const string SEPERATOR = " of "; // I will use this to store each indiv card and make it more readable - e.g. 7 + SEPERATOR + H refers to 7 of Hearts
@@ -93,7 +125,7 @@ int main(){
   userCards[0] = deck[0]; // user gets dealt 2 cards
   userCards[1] = deck[1];
   dealerCards[0] = deck[2]; // dealer gets dealt 2 cards
-  userCards[1] = deck[3];
+  dealerCards[1] = deck[3];
 
   int topCardIndex = 4; // the next card to be dealt will be on index = 4 in the deck array
 
@@ -112,6 +144,23 @@ int main(){
   for (size_t i = 0; i < findNumberofCards(userCards); i++) {
     cout << userCards[i] << ", ";
   }
-  cout << endl << "Your final score: " << userScore << endl;
+  cout << endl << "Your final score: " << userScore << endl << endl;
+
+  // -------DEALER MOVE -----------------------
+  int dealerScore = readScore(dealerCards);
+  Dealer(dealerCards, deck, topCardIndex, dealerScore, userScore); // dealer's turn
+  cout << endl << "Dealer's score: " << dealerScore << endl;
+
+
+  // -------CHECK WHO WINS -----------------------
+  string gameResult;
+  if (userScore > 21) cout <<"Dealer wins!";
+  else if (dealerScore > 21) cout << "User wins!";
+  else{
+    if (userScore == dealerScore) cout << "tie";
+    else if (userScore > dealerScore) cout << "User wins!";
+    else cout << "Dealer wins!";
+  }
+  cout << endl;
 
 }
