@@ -9,14 +9,15 @@
 using namespace std;
 
 bool user(string playerCards[], string deck[], int &topCardIndex,int &userScore, int &currentBet, int &wallet){
-  for (size_t i = 0; i < findNumberofCards(playerCards); i++) {
+  cout << "Your hand is: ";
+  for (size_t i = 0; i < findNumberofCards(playerCards) - 1; i++) {
     cout << playerCards[i] << ", ";
   }
-  cout << endl << " Score: " << userScore << endl;
+  cout << playerCards[findNumberofCards(playerCards) - 1] << endl;
 
-  cout<< "[H]it: draw one more card" << endl;
-  cout << "[D]ouble: double initial bet and draw one last card" << endl;
-  cout << "[S]tand: end turn" << endl << "What's the move? ";
+  cout<< "[H]it: Draw another card" << endl;
+  cout << "[D]ouble: Double initial bet and draw one last card" << endl;
+  cout << "[S]tand: End turn" << endl << "What's the move? ";
 
   char userMove;
   cin >> userMove;

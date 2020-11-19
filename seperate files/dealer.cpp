@@ -11,9 +11,10 @@ using namespace std;
 int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int &dealerScore, int userScore){
   cout << "Dealer's cards: ";
 
-  for (size_t i = 0; i < findNumberofCards(dealerCards); i++) {
+  for (size_t i = 0; i < findNumberofCards(dealerCards) - 1; i++) {
     cout << dealerCards[i] << ", ";
   }
+  cout << dealerCards[findNumberofCards(dealerCards) - 1] << endl;
   // if user has 21 or above, then dealer's turn is over
   if (userScore > 21) return 0;
 

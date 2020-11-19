@@ -16,8 +16,8 @@ using namespace std;
 class playerData{
   public:
     string name;
-    int wallet = 100;
-    string key = "12sdas";
+    int wallet;
+    string key;
 
     // fun stats
     int wins;
@@ -30,21 +30,35 @@ class playerData{
 int main(){
 
 //------------------------------INSTRUCTIONS --------------------------------------------
+  cout << R"(
+        .------..------..------..------..------.     .------..------..------..------.
+        |B.--. ||L.--. ||A.--. ||C.--. ||K.--. |.-.  |J.--. ||A.--. ||C.--. ||K.--. |
+        | :(): || :/\: || (\/) || :/\: || :/\: ((5)) | :(): || (\/) || :/\: || :/\: |
+        | ()() || (__) || :\/: || :\/: || :\/: |'-.-.| ()() || :\/: || :\/: || :\/: |
+        | '--'B|| '--'L|| '--'A|| '--'C|| '--'K| ((1)) '--'J|| '--'A|| '--'C|| '--'K|
+        `------'`------'`------'`------'`------'  '-'`------'`------'`------'`------'
+        )" << endl;
 
-  cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
-  char instructions;
-  cin >> instructions;
-  if(instructions=='Y'){
-    displayInstructions();
+  while(true){
+    cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
+    char instructions;
+    cin >> instructions;
+    if(instructions=='Y'){
+      displayInstructions();
+      break;
+    }
+    else if(instructions =='N'){break;}
+    else { cout << "Invalid Input." << endl;}
   }
 
-  cout << "Begin game" << endl;
+
+  cout << endl << "Begin game!" << endl << endl;
 
   //------------------------------SET UP GAME --------------------------------------------
 
   bool mainGameLoop = true; // the boolean variable for the game to continue
   bool didYouWin = false; // if player won previous round
-  int wallet = 100;
+  int wallet = 1000;
   int currentBet;
   int userScore, dealerScore; // declare the userScore and dealerScore variables, which will be updated every round
   const string SEPERATOR = ""; // I will use this to store each indiv card and make it more readable - e.g. 7 + SEPERATOR + H refers to 7 of Hearts
@@ -56,14 +70,35 @@ int main(){
 
 //------------------------------LOAD GAME FUNCTIONALITY START--------------------------------------------
 
-// SEE BOTTOM OF THIS DOC
+//cout << "Load game or New?" << endl; //Load Game or New Game
+//string choice;
+//cin >> choice;
+
+//if (choice == "Load"){
+  //cout << "Please enter your key: " << endl;
+  //string inputkey;
+  //cin >> inputkey;
+  //loadGame(inputkey);
+//}
+
+//else{
+  //cout << "What is your name?" << endl;
+  //cin >> name; //Initialise the Cash, name, and key
+
+  //generateKey(&key) //Make key only alphabets for simplicity
+
+//  cout << "How much money do you want to buy-in?" << endl;
+//  cin >> wallet;
+
+//  playerData playerdata[i] = {name, wallet, key};
+//  }
 
 //------------------------------LOAD GAME FUNCTIONALITY END--------------------------------------------
 
 
   //------------------------------GAME START--------------------------------------------
   while(mainGameLoop){
-    cout << "How much do you want to bet (in an increment of 10)" << endl; //bet amount
+    cout << "How much do you want to bet this round?" << endl; //bet amount
     cin >> currentBet;
     wallet -= currentBet; //for user board display
 
@@ -104,14 +139,15 @@ int main(){
     int topCardIndex = 4; // the next card to be dealt will be on index = 4 in the deck array
 
     // -------DEAL CARDS -----------------------
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards)); //Prints table for user visual appeal
-
     userScore = readScore(playerCards);
     dealerScore = readScore(dealerCards);
+
+    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore); //Prints table for user visual appeal
+
     if (readScore(playerCards) == 21){ //checking if the player has blackjack
       wallet+=2.5*currentBet;
-      cout << "You have blackjack" << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards));
+      cout << "You have blackjack! You win automatically!" << endl;
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
       didYouWin=true;
     }
     else {
@@ -120,21 +156,27 @@ int main(){
       while (continueUserTurn){ // user turn continues until function returns false
 
         continueUserTurn = user(playerCards,deck,topCardIndex,userScore, currentBet, wallet);
-        printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards));
+        printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
       }
-      for (size_t i = 0; i < findNumberofCards(playerCards); i++) {
+      cout << "Your hand is: ";
+      for (size_t i = 0; i < findNumberofCards(playerCards) - 1; i++) {
         cout << playerCards[i] << ", ";
       }
-      cout << endl << "Your final score: " << userScore << endl << endl;
+      cout << playerCards[findNumberofCards(playerCards) - 1] << endl;
+      cout << "Your final score: " << userScore << endl << endl;
 
       // -------DEALER MOVE -----------------------
       dealer(dealerCards, deck, topCardIndex, dealerScore, userScore); // dealer's turn
-      cout << endl << "Dealer's score: " << dealerScore << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards));
+      cout << "Dealer's score: " << dealerScore << endl;
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
     }
 
     // ------- Check winner -----------------------
     winner(userScore, dealerScore, wallet, currentBet);
+
+    currentBet = 0;
+    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+
 
     // ------- Update database -----------------------
     // updateUsers(playerdata); //update users.txt
@@ -147,11 +189,13 @@ int main(){
     }
 
     // -------Play again check -----------------------
-    cout << "Do you want to continue playing? Input Y or N" << endl; // Round playing
-    char continueGame;
-    cin >> continueGame;
-    if(continueGame=='N'){
-      mainGameLoop=false;
+    else{
+      cout << "Do you want to continue playing? Input Y or N" << endl; // Round playing
+      char continueGame;
+      cin >> continueGame;
+      if(continueGame=='N'){
+        mainGameLoop=false;
+      }
     }
   }
   // ------- Provide user's with key (given they have money to play again)-----------------------
@@ -164,27 +208,6 @@ int main(){
 
 //------------------------------LOAD GAME FUNCTIONALITY START--------------------------------------------
 
-  //cout << "Load game or New?" << endl; //Load Game or New Game
-  //string choice;
-  //cin >> choice;
 
-  //if (choice == "Load"){
-    //cout << "Please enter your key: " << endl;
-    //string inputkey;
-    //cin >> inputkey;
-    //loadGame(inputkey);
-  //}
-
-  //else{
-    //cout << "What is your name?" << endl;
-    //cin >> name; //Initialise the Cash, name, and key
-
-    //generateKey(&key) //Make key only alphabets for simplicity
-
-  //  cout << "How much money do you want to buy-in?" << endl;
-  //  cin >> wallet;
-
-  //  playerData playerdata[i] = {name, wallet, key};
-//  }
 
 //------------------------------LOAD GAME FUNCTIONALITY END--------------------------------------------
