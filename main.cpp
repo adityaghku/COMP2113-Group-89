@@ -9,7 +9,7 @@ using namespace std;
 class playerData{
   public:
     string name;
-    int wallet;
+    int wallet = 100;
     string key = "12sdas";
 
     // fun stats
@@ -28,9 +28,9 @@ void PrintBoard(int wallet,int currentBet, string playerCards[15], string dealer
 int findNumberofCards(string cards[]);
 
 int readScore(string cards[]);
-bool User(string playerCards[], string deck[], int &topCardIndex,int &userScore);
+bool User(string playerCards[], string deck[], int &topCardIndex,int &userScore, int &currentBet, int &wallet);
 int Dealer(string dealerCards[], string deck[], int &topCardIndex,int &dealerScore, int userScore);
-void Winner(int userScore, int dealerScore, int wallet, int currentBet);
+void Winner(int userScore, int dealerScore, int &wallet, int currentBet);
 //instructions
 void displayInstructions();
 
@@ -51,7 +51,8 @@ int main(){
 
   bool mainGameLoop = true; // the boolean variable for the game to continue
   bool didYouWin = false; // if player won previous round
-  int wallet,currentBet = 0;
+  int wallet = 100;
+  int currentBet;
   int userScore, dealerScore; // declare the userScore and dealerScore variables, which will be updated every round
   const string SEPERATOR = ""; // I will use this to store each indiv card and make it more readable - e.g. 7 + SEPERATOR + H refers to 7 of Hearts
 
@@ -71,7 +72,7 @@ int main(){
   while(mainGameLoop){
     cout << "How much do you want to bet (in an increment of 10)" << endl; //bet amount
     cin >> currentBet;
-    wallet-=currentBet; //for user board display
+    wallet -= currentBet; //for user board display
 
     for(int i = 0; i < 15; i++) { // initialize the array of playerCards and dealerCards
         playerCards[i].clear();
@@ -125,9 +126,8 @@ int main(){
       bool continueUserTurn = true;
       while (continueUserTurn){ // user turn continues until function returns false
 
-        continueUserTurn = User(playerCards,deck,topCardIndex,userScore);
+        continueUserTurn = User(playerCards,deck,topCardIndex,userScore, currentBet, wallet);
         PrintBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards));
-
       }
       for (size_t i = 0; i < findNumberofCards(playerCards); i++) {
         cout << playerCards[i] << ", ";
@@ -148,7 +148,7 @@ int main(){
 
     // -------Wallet balance check -----------------------
 
-    if(wallet==0){
+    if(wallet <= 0){
       cout << "You have no more money left, you lose" << endl; //Money check condition
       mainGameLoop = false;
     }
@@ -351,7 +351,7 @@ int readScore(string cards[]){
   return score;
 }
 
-bool User(string playerCards[], string deck[], int &topCardIndex,int &userScore){
+bool User(string playerCards[], string deck[], int &topCardIndex,int &userScore, int &currentBet, int &wallet){
   for (size_t i = 0; i < findNumberofCards(playerCards); i++) {
     cout << playerCards[i] << ", ";
   }
@@ -369,6 +369,16 @@ bool User(string playerCards[], string deck[], int &topCardIndex,int &userScore)
     playerCards[findNumberofCards(playerCards)] = deck[topCardIndex];
     topCardIndex += 1;
     userScore = readScore(playerCards);
+    if (userMove == 'D'){
+      if (wallet > currentBet) {
+        wallet -= currentBet;
+        currentBet = 2 * currentBet;
+        return false;
+      }
+      else{
+        cout << "You can not double your bet, but you can draw an extra card" << endl;
+      }
+    }
   }
 
   //Check score for bust or max score
@@ -399,8 +409,10 @@ int Dealer(string dealerCards[], string deck[], int &topCardIndex,int &dealerSco
   }
 }
 
-void Winner(int userScore, int dealerScore, int wallet, int currentBet){
-  if (userScore > 21 || dealerScore > userScore) cout << "You Lose" << endl;
+void Winner(int userScore, int dealerScore, int &wallet, int currentBet){
+  if (userScore > 21 || dealerScore > userScore) {
+    cout << "You Lose" << endl;
+  }
 
   else if (dealerScore > 21 || userScore > dealerScore){
     cout << "You win" << endl;
