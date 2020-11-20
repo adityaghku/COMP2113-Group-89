@@ -48,5 +48,17 @@ The game we have created is an electronic version of blackjack. In this game, th
     • The program code will be separated into multiple front end and back end files of .h and .cpp. Examples include winner.h, winner.cpp, user.h, and user.cpp.
     • We will use makefile to link up the relevant file dependencies based on how the files are divided in the final project.
 
+### Non-standard C/C++ libraries used
+#### a
+    • Used for 
+#### b
+    • Used for 
+ 
+### Non-standard C/C++ libraries used
+1. Download the files from the github repository
+2. Launch terminal and change the directory of the terminal to corresponding folder containing all the game files
+3. Put terminal on full screen
+4. Enter the command 'make main' followed by './main' 
+
 #### References
 https://www.contrib.andrew.cmu.edu/~gc00/reviews/pokerrules
