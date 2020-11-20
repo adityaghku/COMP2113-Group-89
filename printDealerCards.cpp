@@ -19,8 +19,9 @@ void printDealerCards(int n, string dealerCards[15]){
 
   for (int i = 0; i < n; i++){
     if (i == 0){
-
-      if (dealerCards[i].substr(0,1)=="1"){
+      char temp;
+      temp = dealerCards[i][0];
+      if (temp=='1'){
         cout << "|" << setw(30) << "|" << dealerCards[i] << " |" << " ";
       }
       else{
@@ -45,7 +46,9 @@ void printDealerCards(int n, string dealerCards[15]){
 
   for (int i = 0; i < n; i++){
     if (i == 0){
-      if (dealerCards[i].substr(0,1)=="1"){
+      char temp;
+      temp = dealerCards[i][0];
+      if (temp=='1'){
         cout << "|" << setw(30) << "|" << " " << dealerCards[i] << "|" << " ";
       }
       else{
