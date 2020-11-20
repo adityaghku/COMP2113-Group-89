@@ -21,7 +21,7 @@ bool user(string playerCards[], string deck[], int &topCardIndex,int &userScore,
 
   char userMove;
   cin >> userMove;
-
+  cout << endl;
   if (userMove == 'S') return false;
   else{ // if not Stand then must be Hit or Double --> must draw an additional card
     playerCards[findNumberofCards(playerCards)] = deck[topCardIndex];

@@ -1,4 +1,8 @@
 #Compile files here
+
+saveload.o: saveload.cpp saveload.h
+	g++ -pedantic-errors -std=c++11 -c saveload.cpp
+
 printDealerCards.o: printDealerCards.cpp printDealerCards.h
 	g++ -pedantic-errors -std=c++11 -c printDealerCards.cpp
 
@@ -33,8 +37,8 @@ main.o: main.cpp
 	g++ -pedantic-errors -std=c++11 -c main.cpp
 
 # Make sure to link file to main (if required)
-main: main.o displayInstructions.o winner.o readScore.o findNumberofCards.o user.o dealer.o printBoard.o printDealerCards.o printPlayerCards.o numberofDigits.o
-	g++ -pedantic-errors -std=c++11 main.o displayInstructions.o winner.o readScore.o findNumberofCards.o user.o dealer.o printBoard.o printDealerCards.o printPlayerCards.o numberofDigits.o -o main
+main: main.o displayInstructions.o winner.o readScore.o findNumberofCards.o user.o dealer.o printBoard.o printDealerCards.o printPlayerCards.o numberofDigits.o saveload.o
+	g++ -pedantic-errors -std=c++11 main.o displayInstructions.o winner.o readScore.o findNumberofCards.o user.o dealer.o printBoard.o printDealerCards.o printPlayerCards.o numberofDigits.o saveload.o -o main
 
 # BELOW is the main: target but without linking the printDealerCards, printPlayerCards, numberofDigits' .o files (this doesn't work tho)
 # main: main.o displayInstructions.o winner.o readScore.o findNumberofCards.o user.o dealer.o printBoard.o
