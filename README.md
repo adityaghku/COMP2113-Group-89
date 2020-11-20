@@ -69,11 +69,14 @@ The game we have created is an electronic version of blackjack. In this game, th
     •  
     
  
-### Non-standard C/C++ libraries used
+### Compilation and Execution Instructions
 1. Download the files from the github repository
 2. Launch terminal and change the directory of the terminal to corresponding folder containing all the game files
 3. Put terminal on full screen
 4. Enter the command 'make main' followed by './main' 
+5. Follow the prompts on screen to play the game. 
+
+Note: Do not enter any invalid inputs or the program will not run as expected
 
 #### References
 https://www.contrib.andrew.cmu.edu/~gc00/reviews/pokerrules
