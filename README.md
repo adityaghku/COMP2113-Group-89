@@ -48,11 +48,26 @@ The game we have created is an electronic version of blackjack. In this game, th
     • The program code will be separated into multiple front end and back end files of .h and .cpp. Examples include winner.h, winner.cpp, user.h, and user.cpp.
     • We will use makefile to link up the relevant file dependencies based on how the files are divided in the final project.
 
-### Non-standard C/C++ libraries used
-#### a
-    • Used for 
-#### b
-    • Used for 
+### C/C++ Libraries used
+#### iostream
+    • 
+#### unistd
+    • For creating time delay when dealer draws cards
+#### string
+    • For using string types
+#### iomanip
+    • ??
+#### random
+    •  ??
+#### sstream
+    • ??
+#### stdlib
+    • For random number generation
+#### ctime
+    • For random number generation
+#### 
+    •  
+    
  
 ### Non-standard C/C++ libraries used
 1. Download the files from the github repository
