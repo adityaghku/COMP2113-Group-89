@@ -8,6 +8,13 @@
 #include "numberofDigits.h"
 using namespace std;
 
+/*
+Purpose:
+Inputs:
+  - x:
+Outputs:
+  - y:
+*/
 void printBoard(int wallet,int currentBet, string playerCards[15], string dealerCards[15], int playerCardsSize, int dealerCardsSize,int userScore, int dealerScore){
   cout << setfill('-') << setw(72) << " " << endl;
   cout << setfill(' ');

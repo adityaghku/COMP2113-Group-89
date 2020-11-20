@@ -18,7 +18,7 @@ using namespace std;
 
 
 int main(){
-
+  system("clear");
 //------------------------------INSTRUCTIONS --------------------------------------------
   cout << R"(
         .------..------..------..------..------.     .------..------..------..------.
@@ -30,24 +30,31 @@ int main(){
         )" << endl;
 
   while(true){
-    cout << "Do you want to view the instructions? Y or N" << endl; //Instructions
+    cout << char(27) << "[1m" << "Welcome to Blacjack by Aayush Batwara and Aditya Gupta!"<< char(27) << "[0m" << endl << endl;
+
+    cout << char(27) << "[1m" << "Do you want to view the instructions? Y or N" << char(27) << "[0m" << endl;
     char instructions;
     cin >> instructions;
     if(instructions=='Y'){
       displayInstructions();
+      cout << endl << char(27) << "[1m" << "Enter any key to continue: " << char(27) << "[0m" << endl;
+      string anyKey;
+      cin >> anyKey;
       break;
     }
     else if(instructions =='N'){break;}
     else { cout << "Invalid Input." << endl;}
   }
 
+  system("clear");
+  cout << endl << char(27) << "[1m" << "Let's begin the game!" << char(27) << "[0m" << endl << endl;
 
-  cout << endl << "Begin game!" << endl << endl;
 
   //------------------------------SET UP GAME --------------------------------------------
 
   bool mainGameLoop = true; // the boolean variable for the game to continue
   bool didYouWin = false; // if player won previous round
+  bool blackjack = false; // boolean variable for if the player won via Blackjack
   int wallet;
   int currentBet;
   int userScore, dealerScore; // declare the userScore and dealerScore variables, which will be updated every round
@@ -65,12 +72,12 @@ int main(){
 
   while (true){
     arrayofPlayers_size = load_data(arrayofPlayers, arrayofPlayers_size);
-    cout << "Do you want to load an old game? Y or N." << endl; //Load Game or New Game
+    cout  << char(27) << "[1m" << "Do you want to load an old game? Y or N." << char(27) << "[0m" << endl; //Load Game or New Game
 
     char loadgame;
     cin >> loadgame;
     if(loadgame=='Y'){
-      cout << "Please enter your key: " << endl;
+      cout << char(27) << "[1m" << "Please enter your key: " << char(27) << "[0m" << endl;
       string key_input;
       cin >> key_input;
       for (int i = 0; i < arrayofPlayers_size; i++){
@@ -82,6 +89,7 @@ int main(){
 
     }
     else if(loadgame =='N'){
+      system("clear");
       addUser( arrayofPlayers, arrayofPlayers_size);
       break;
     }
@@ -93,11 +101,23 @@ int main(){
 
 
   //------------------------------GAME START--------------------------------------------
+  wallet = arrayofPlayers[currentplayer].wallet;
   while(mainGameLoop){
-    wallet = arrayofPlayers[currentplayer].wallet;
-    cout << "How much do you want to bet this round?" << endl; //bet amount
-    cin >> currentBet;
+    system("clear");
+    bool continueLoop = true;
+    while (continueLoop){ // get the bet amount
+      cout << char(27) << "[1m" << "How much do you want to bet this round? Please enter a positive integer" << char(27) << "[0m" << endl;
+      cout << char(27) << "[1m" << "Current wallet balance: " << wallet << char(27) << "[0m" << endl;
+      cin >> currentBet;
+      if (currentBet > wallet) cout << char(27) << "[1m" << "Insufficient balance. Please bet a lower amount." << char(27) << "[0m" << endl<< endl;
+      else if (currentBet <= 0) cout << char(27) << "[1m"  << "Please enter a positive integer as the bet amount" << char(27) << "[0m" << endl << endl;
+      else continueLoop = false;
+
+    }
     wallet -= currentBet; //for user board display
+    cout << endl << char(27) << "[1m" << "Your bet amount is " << currentBet << endl << "Enter any key to continue to your turn: " << char(27) << "[0m" << endl;
+    string anyKey;
+    cin >> anyKey;
 
     for(int i = 0; i < 15; i++) { // initialize the array of playerCards and dealerCards
         playerCards[i].clear();
@@ -132,45 +152,52 @@ int main(){
 
     int topCardIndex = 4; // the next card to be dealt will be on index = 4 in the deck array
 
-    // -------DEAL CARDS -----------------------
+    // -------GAMEPLAY BEGINS -----------------------
     userScore = readScore(playerCards);
     dealerScore = readScore(dealerCards);
+    system("clear");
+    blackjack = false;
 
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore); //Prints table for user visual appeal
-
-    if (readScore(playerCards) == 21){ //checking if the player has blackjack
+    // ------CHECK FOR BLACJACK--------------------------
+    if (readScore(playerCards) == 21){
+      cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore); //Prints table for user visual appeal
+      cout << char(27) << "[1m" << "You have blackjack! You win automatically!" << char(27) << "[0m" << endl;
+      didYouWin = true;
+      blackjack = true;
       wallet+=2.5*currentBet;
-      cout << "You have blackjack! You win automatically!" << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
-      didYouWin=true;
+      cout << endl << char(27) << "[1m" << "Your turn is over." << endl << endl << "Enter any key to continue: " << char(27) << "[0m" << endl;
+      string anyKey;
+      cin >> anyKey;
     }
     else {
       // -------USER MOVE -----------------------
       bool continueUserTurn = true;
+      bool doubleCheck = false;
+      cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
       while (continueUserTurn){ // user turn continues until function returns false
-
-        continueUserTurn = user(playerCards,deck,topCardIndex,userScore, currentBet, wallet);
+        continueUserTurn = user(playerCards,deck,topCardIndex,userScore, currentBet, wallet, doubleCheck);
+        system("clear");
+        cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
         printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+        if (doubleCheck) cout << endl << char(27) << "[1m" << "Due to insufficient funds, you can not double your bet. Hence your move counts as a Hit" << char(27) << "[0m" << endl << endl;
+        doubleCheck = false;
       }
-      cout << "Your hand is: ";
-      for (size_t i = 0; i < findNumberofCards(playerCards) - 1; i++) {
-        cout << playerCards[i] << ", ";
-      }
-      cout << playerCards[findNumberofCards(playerCards) - 1] << endl;
-      cout << "Your final score: " << userScore << endl << endl;
+
+      cout << endl << char(27) << "[1m" << "Your turn is over." << endl << endl << "Enter any key to continue to Dealer's turn: " << char(27) << "[0m" << endl;
+      string anyKey;
+      cin >> anyKey;
 
       // -------DEALER MOVE -----------------------
-      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore); // dealer's turn
-      cout << "Dealer's score: " << dealerScore << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore, wallet,currentBet, playerCards); 
     }
 
     // ------- Check winner -----------------------
-    winner(userScore, dealerScore, wallet, currentBet);
+    winner(userScore, dealerScore, wallet, currentBet, blackjack);
 
     currentBet = 0;
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
-
+    cout << endl << char(27) << "[1m" << "Wallet balance: " << wallet << char(27) << "[0m" << endl;
 
     // ------- Update database -----------------------
     arrayofPlayers_size = save_file(filename, arrayofPlayers, arrayofPlayers_size);

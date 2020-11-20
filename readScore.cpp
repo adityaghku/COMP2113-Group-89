@@ -8,6 +8,13 @@
 
 using namespace std;
 
+/*
+Purpose: calculate the score of a given hand (user or dealer's cards)
+Inputs:
+  - cards: string array of cards
+Outputs:
+  - score: sum of point values of all cards
+*/
 int readScore(string cards[]){
   int maxIndex = findNumberofCards(cards); // see how many cards there are in the array
 

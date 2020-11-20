@@ -4,6 +4,13 @@
 #include <iomanip>
 using namespace std;
 
+/*
+Purpose:
+Inputs:
+  - x:
+Outputs:
+  - y:
+*/
 void printPlayerCards(int n, string playerCards[15]){
   int l = 34 - 7*(n-1);
 

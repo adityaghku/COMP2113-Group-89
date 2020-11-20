@@ -5,7 +5,13 @@
 #include "saveload.h"
 using namespace std;
 
-
+/*
+Purpose:
+Inputs:
+  - x:
+Outputs:
+  - y:
+*/
 string filename = "users.txt";
 
 string generateKey(){
