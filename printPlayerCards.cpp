@@ -1,10 +1,17 @@
-//printDealerCards.cpp
+//printPlayerCards.cpp
 #include <iostream>
 #include <string>
 #include <iomanip>
 using namespace std;
 
-void printDealerCards(int n, string dealerCards[15]){
+/*
+Purpose:
+Inputs:
+  - x:
+Outputs:
+  - y:
+*/
+void printPlayerCards(int n, string playerCards[15]){
   int l = 34 - 7*(n-1);
 
   for (int i = 0; i < n; i++){
@@ -20,16 +27,16 @@ void printDealerCards(int n, string dealerCards[15]){
   for (int i = 0; i < n; i++){
     if (i == 0){
       char temp;
-      temp = dealerCards[i][0];
+      temp = playerCards[i][0];
       if (temp=='1'){
-        cout << "|" << setw(30) << "|" << dealerCards[i] << " |" << " ";
+        cout << "|" << setw(30) << "|" << playerCards[i] << " |" << " ";
       }
       else{
-        cout << "|" << setw(30) << "|" << dealerCards[i] << "  |" << " ";
+        cout << "|" << setw(30) << "|" << playerCards[i] << "  |" << " ";
       }
     }
     else{
-      cout << "|" << dealerCards[i] << "  |" << " ";
+      cout << "|" << playerCards[i] << "  |" << " ";
     }
   }
   cout << setw(l) << "|" << endl;
@@ -47,16 +54,16 @@ void printDealerCards(int n, string dealerCards[15]){
   for (int i = 0; i < n; i++){
     if (i == 0){
       char temp;
-      temp = dealerCards[i][0];
+      temp = playerCards[i][0];
       if (temp=='1'){
-        cout << "|" << setw(30) << "|" << " " << dealerCards[i] << "|" << " ";
+        cout << "|" << setw(30) << "|" << " " << playerCards[i] << "|" << " ";
       }
       else{
-        cout << "|" << setw(30) << "|" << "  " << dealerCards[i] << "|" << " ";
+        cout << "|" << setw(30) << "|" << "  " << playerCards[i] << "|" << " ";
       }
     }
     else{
-      cout << "|" << "  " << dealerCards[i] << "|" << " ";
+      cout << "|" << "  " << playerCards[i] << "|" << " ";
     }
   }
   cout << setw(l) << "|" << endl;

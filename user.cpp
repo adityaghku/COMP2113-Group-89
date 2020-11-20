@@ -8,6 +8,19 @@
 #include "readScore.h"
 using namespace std;
 
+/*
+Purpose: provides implementation for accepting and processing user's moves
+Inputs:
+- playerCards: string array of user's cards
+- deck: string array of deck of cards
+- topCardIndex: integer index of the 'next' card to be drawn from deck
+- userScore: current score of user
+- currentBet: user's current bet
+- wallet: user's wallet amount
+- doubleCheck: a boolean which turns true when the user selects the 'Double' move
+Outputs:
+  - a boolean which is false if this is the user's last move, and true otherwise
+*/
 bool user(string playerCards[], string deck[], int &topCardIndex,int &userScore, int &currentBet, int &wallet, bool &doubleCheck){
   cout << char(27) << "[1m" << "Your moves:" << char(27) << "[0m" << endl<< endl;
   cout<< char(27) << "[1m" << " [H]it: Draw another card" << endl << " [D]ouble: Double initial bet and draw one last card" << endl << " [S]tand: End turn" << endl << endl << "What's the move? " << char(27) << "[0m";
