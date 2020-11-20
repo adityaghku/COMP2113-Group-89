@@ -1,7 +1,7 @@
 # Group 89
 ## Aditya Gupta - 3035662297 & Aayush Batwara - 3035660433
 
-The game we have created is an electronic version of blackjack. In this game, the player can play the game blackjack against the dealer, choosing their own bet amount to try and win as much money as possible against the casino.
+The game we have created is an electronic version of blackjack. In this game, the player can play the game blackjack against the dealer, choosing their own bet amount to try and win as much money as possible against the casino. 
 
 ### Game Rules
 1. In Blackjack, the player has to try to beat the dealer without going bust.
@@ -12,7 +12,7 @@ The game we have created is an electronic version of blackjack. In this game, th
 6. The player can also choose to "double". If the player "doubles", then they double their original bet, but can only receive one more card before their turn is over.
 7. If you receive an Ace and a face card as your first two cards, then you have received Blackjack and you automatically receive your bet plus 1.5 times your bet back.
 8. If you win a round normally, you receive your original bet plus an amount equal to your original bet back.
-9. After you stand, it is now the dealers turn. The dealer will hit until their score is 17 or higher, after which they will stand. The winner of the round is the individual with the score closest to 21, but not more than 21.
+9. After you stand, it is now the dealers turn. The dealer will hit until their score is 17 or higher, after which they will stand. The winner of the round is the individual with the score closest to 21, but not more than 21. 
 
 ### Gameplay
 1. The user places a bet for a given round.
@@ -34,7 +34,7 @@ The game we have created is an electronic version of blackjack. In this game, th
 ### 2. Data structures for storing game status
     • We have used a combination of pass by reference vs pass by value to alter the game status as the game progresses.
     • There is  a centralized function which calls secondary functions to run the different parts of the game - for example, main() begins the game but printBoard() prints the cards and winner() evaluates winner.
-    • A Deck array is used, and in each round the array is re-shuffled.
+    • A Deck array is used, and in each round the array is re-shuffled. 
     • --------SOMETHING ABOUT CLASSES WITH SAVE/LOAD------
 ### 3. Dynamic memory management
     • Pointers and Dynamic Memory Management will be used primarily in the operations relating to the deck.
@@ -50,7 +50,7 @@ The game we have created is an electronic version of blackjack. In this game, th
 
 ### C/C++ Libraries used
 #### iostream
-    •
+    • 
 #### unistd
     • For creating time delay when dealer draws cards
 #### string
@@ -65,16 +65,16 @@ The game we have created is an electronic version of blackjack. In this game, th
     • For random number generation
 #### ctime
     • For random number generation
-####
+#### 
     •  
-
-
+    
+ 
 ### Compilation and Execution Instructions
 1. Download the files from the github repository
 2. Launch terminal and change the directory of the terminal to corresponding folder containing all the game files
 3. Put terminal on full screen
-4. Enter the command 'make main' followed by './main'
-5. Follow the prompts on screen to play the game.
+4. Enter the command 'make main' followed by './main' 
+5. Follow the prompts on screen to play the game. 
 
 Note: Do not enter any invalid inputs or the program will not run as expected
 

@@ -3,13 +3,6 @@
 #include <iomanip>
 using namespace std;
 
-/*
-Purpose:
-Inputs:
-  - x:
-Outputs:
-  - y:
-*/
 int numberofDigits(int n){
   int count = 0;
   while (n != 0){
