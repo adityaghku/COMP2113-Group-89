@@ -63,6 +63,7 @@ int main(){
   string filename = "users.txt";
 
   int arrayofPlayers_size = 3;
+  int numberofPlayers = 0;
   playerData * arrayofPlayers = new playerData[arrayofPlayers_size];
   int currentplayer = 0;
 
@@ -71,7 +72,8 @@ int main(){
 //------------------------------LOAD GAME FUNCTIONALITY START--------------------------------------------
 
   while (true){
-    arrayofPlayers_size = load_data(arrayofPlayers, arrayofPlayers_size);
+    numberofPlayers = load_data(arrayofPlayers, arrayofPlayers_size);
+
     cout  << char(27) << "[1m" << "Do you want to load an old game? Y or N." << char(27) << "[0m" << endl; //Load Game or New Game
 
     char loadgame;
@@ -80,17 +82,23 @@ int main(){
       cout << char(27) << "[1m" << "Please enter your key: " << char(27) << "[0m" << endl;
       string key_input;
       cin >> key_input;
-      for (int i = 0; i < arrayofPlayers_size; i++){
+      for (int i = 0; i < numberofPlayers; i++){
         if (arrayofPlayers[i].key == key_input){
           currentplayer = i;
         }
       }
+
+      cout << "Enter any key to continue to your turn: " << endl;
+      string anyKey;
+      cin >> anyKey;
+
       break;
 
     }
     else if(loadgame =='N'){
       system("clear");
-      addUser( arrayofPlayers, arrayofPlayers_size);
+      addUser( arrayofPlayers, numberofPlayers);
+      currentplayer = numberofPlayers;
       break;
     }
 
@@ -102,7 +110,12 @@ int main(){
 
   //------------------------------GAME START--------------------------------------------
   wallet = arrayofPlayers[currentplayer].wallet;
+
   while(mainGameLoop){
+    if (wallet == 0){
+      mainGameLoop =false;
+      cout << "You have no more money left, you lose" << endl;
+    }
     system("clear");
     bool continueLoop = true;
     while (continueLoop){ // get the bet amount
@@ -115,7 +128,7 @@ int main(){
 
     }
     wallet -= currentBet; //for user board display
-    cout << endl << char(27) << "[1m" << "Your bet amount is " << currentBet << endl << "Enter any key to continue to your turn: " << char(27) << "[0m" << endl;
+    cout << endl << char(27) << "[1m" << "Your bet amount is $" << currentBet << endl << "Enter any key to continue to your turn: " << char(27) << "[0m" << endl;
     string anyKey;
     cin >> anyKey;
 
@@ -190,7 +203,7 @@ int main(){
       cin >> anyKey;
 
       // -------DEALER MOVE -----------------------
-      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore, wallet,currentBet, playerCards); 
+      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore, wallet,currentBet, playerCards);
     }
 
     // ------- Check winner -----------------------
@@ -200,6 +213,7 @@ int main(){
     cout << endl << char(27) << "[1m" << "Wallet balance: " << wallet << char(27) << "[0m" << endl;
 
     // ------- Update database -----------------------
+    arrayofPlayers[currentplayer].wallet = wallet;
     arrayofPlayers_size = save_file(filename, arrayofPlayers, arrayofPlayers_size);
 
     // -------Wallet balance check -----------------------

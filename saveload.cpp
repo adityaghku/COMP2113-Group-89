@@ -87,28 +87,46 @@ void grow_file(playerData * &arrayofPlayers, int &arrayofPlayers_size){
 	return;
 }
 
-int addUser(playerData arrayofPlayers[], int arrayofPlayers_size)
+int addUser(playerData arrayofPlayers[], int numberofPlayers)
 {
 	char ans;
 	string str;
 
 	getline(cin, str); // flush the keyboard buffer
 	cout << "Please enter a name: ";
-	getline(cin, arrayofPlayers[arrayofPlayers_size].name);
+	getline(cin, arrayofPlayers[numberofPlayers].name);
 
-  cout << "How much money do you want to buy-in?" << endl;
-  cin >> arrayofPlayers[arrayofPlayers_size].wallet;
+  while(true){
+    cout << "How much money do you want to buy-in?" << endl;
+    int temp;
+
+    cin >> temp;
+
+    arrayofPlayers[numberofPlayers].wallet = temp;
+
+    if (arrayofPlayers[numberofPlayers].wallet <=0){
+      cout << "Invalid Input. Please Try again." << endl;
+    }
+    else{
+      break;
+    }
+  }
+
 
   string key;
   key = generateKey();
-  arrayofPlayers[arrayofPlayers_size].key = key;
-	cout << endl;
-	arrayofPlayers_size++;
+  arrayofPlayers[numberofPlayers].key = key;
+	cout << "Your key is: " << key << endl;
+  cout << "Enter any key to continue to your turn: " << endl;
+  string anyKey;
+  cin >> anyKey;
 
-	return arrayofPlayers_size;
+	numberofPlayers++;
+
+	return numberofPlayers;
 }
 
-int save_file(string filename, playerData arrayofPlayers[], int arrayofPlayers_size)
+int save_file(string filename, playerData arrayofPlayers[], int numberofPlayers)
 {
     ofstream fout;
     fout.open(filename.c_str());
@@ -119,7 +137,7 @@ int save_file(string filename, playerData arrayofPlayers[], int arrayofPlayers_s
     }
 
     int i;
-    for (i = 0; i < arrayofPlayers_size; i++)
+    for (i = 0; i < numberofPlayers; i++)
     {
         fout << arrayofPlayers[i].name << "," << arrayofPlayers[i].wallet << "," << arrayofPlayers[i].key << endl;
     }

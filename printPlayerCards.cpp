@@ -36,7 +36,14 @@ void printPlayerCards(int n, string playerCards[15]){
       }
     }
     else{
-      cout << "|" << playerCards[i] << "  |" << " ";
+      char temp;
+      temp = playerCards[i][0];
+      if (temp=='1'){
+        cout << "|" << playerCards[i] << " |" << " ";
+      }
+      else{
+        cout << "|" << playerCards[i] << "  |" << " ";
+      }
     }
   }
   cout << setw(l) << "|" << endl;
@@ -63,7 +70,14 @@ void printPlayerCards(int n, string playerCards[15]){
       }
     }
     else{
-      cout << "|" << "  " << playerCards[i] << "|" << " ";
+      char temp;
+      temp = playerCards[i][0];
+      if (temp=='1'){
+        cout << "|" << " " << playerCards[i] << "|" << " ";
+      }
+      else{
+        cout << "|" << "  " << playerCards[i] << "|" << " ";
+      }
     }
   }
   cout << setw(l) << "|" << endl;

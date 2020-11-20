@@ -36,7 +36,14 @@ void printDealerCards(int n, string dealerCards[15]){
       }
     }
     else{
-      cout << "|" << dealerCards[i] << "  |" << " ";
+      char temp;
+      temp = dealerCards[i][0];
+      if (temp=='1'){
+        cout << "|" << dealerCards[i] << " |" << " ";
+      }
+      else{
+        cout << "|" << dealerCards[i] << "  |" << " ";
+      }
     }
   }
   cout << setw(l) << "|" << endl;
@@ -63,7 +70,14 @@ void printDealerCards(int n, string dealerCards[15]){
       }
     }
     else{
-      cout << "|" << "  " << dealerCards[i] << "|" << " ";
+      char temp;
+      temp = dealerCards[i][0];
+      if (temp=='1'){
+        cout << "|" << " " << dealerCards[i] << "|" << " ";
+      }
+      else{
+        cout << "|" << "  " << dealerCards[i] << "|" << " ";
+      }
     }
   }
   cout << setw(l) << "|" << endl;
