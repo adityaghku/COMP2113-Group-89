@@ -25,9 +25,18 @@ void printBoard(int wallet,int currentBet, string playerCards[15], string dealer
   printDealerCards(dealerCardsSize, dealerCards, userfinished); //dealer cards printed
   cout << "|" << setw(70) << "|" << endl;
 
-  cout << "|" << "                     Dealers Score: " << dealerScore;
-  int l = 70 - 36 - numberofDigits(dealerScore); // all calculations done for symmetricity and spacing
-  cout << setw(l) << "|" << endl;
+  if (userfinished){
+    cout << "|" << "                     Dealers Score: " << dealerScore;
+    int l = 70 - 36 - numberofDigits(dealerScore); // all calculations done for symmetricity and spacing
+    cout << setw(l) << "|" << endl;
+  }
+  else{
+    cout << "|" << "                     Dealers Score: ";
+    int l = 70 - 36; // all calculations done for symmetricity and spacing
+    cout << setw(l) << "|" << endl;
+  }
+
+  int l;
 
   cout << "|" << setw(70) << "|" << endl;
   cout << "|" << "      Wallet: " << "$" << wallet;
