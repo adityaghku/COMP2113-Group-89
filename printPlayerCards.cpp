@@ -5,11 +5,11 @@
 using namespace std;
 
 /*
-Purpose:
+Purpose: Prints out the players cards
 Inputs:
-  - x:
+  - x: takes length of player cards and the cards
 Outputs:
-  - y:
+  - y: prints the dealers card on the UI interface
 */
 void printPlayerCards(int n, string playerCards[15]){
   int l = 34 - 7*(n-1);

@@ -4,11 +4,11 @@
 using namespace std;
 
 /*
-Purpose:
+Purpose: To ease printing, returns number of digits of an integer
 Inputs:
-  - x:
+  - x: An integer
 Outputs:
-  - y:
+  - y: The number of digits in that integer
 */
 int numberofDigits(int n){
   int count = 0;

@@ -98,8 +98,8 @@ int main(){
     }
     else if(loadgame =='N'){
       system("clear");
-      numberofPlayers = addUser(arrayofPlayers, numberofPlayers, arrayofPlayers_size);
-      currentplayer = numberofPlayers;
+      addUser(arrayofPlayers, numberofPlayers, arrayofPlayers_size);
+      currentplayer = numberofPlayers - 1;
       break;
     }
 
