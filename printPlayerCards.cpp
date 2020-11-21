@@ -28,7 +28,7 @@ void printPlayerCards(int n, string playerCards[15]){
     if (i == 0){
       char temp;
       temp = playerCards[i][0];
-      if (temp=='1'){
+      if (temp == '1'){
         cout << "|" << setw(30) << "|" << playerCards[i] << " |" << " ";
       }
       else{
@@ -38,7 +38,7 @@ void printPlayerCards(int n, string playerCards[15]){
     else{
       char temp;
       temp = playerCards[i][0];
-      if (temp=='1'){
+      if (temp == '1'){
         cout << "|" << playerCards[i] << " |" << " ";
       }
       else{

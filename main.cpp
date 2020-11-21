@@ -30,12 +30,12 @@ int main(){
         )" << endl;
 
   while(true){
-    cout << char(27) << "[1m" << "Welcome to Blacjack by Aayush Batwara and Aditya Gupta!"<< char(27) << "[0m" << endl << endl;
+    cout << char(27) << "[1m" << "Welcome to Blackjack by Aayush Batwara and Aditya Gupta!"<< char(27) << "[0m" << endl << endl;
 
     cout << char(27) << "[1m" << "Do you want to view the instructions? Y or N" << char(27) << "[0m" << endl;
     char instructions;
     cin >> instructions;
-    if(instructions=='Y'){
+    if(instructions == 'Y'){
       displayInstructions();
       cout << endl << char(27) << "[1m" << "Enter any key to continue: " << char(27) << "[0m" << endl;
       string anyKey;
@@ -64,8 +64,9 @@ int main(){
 
   int arrayofPlayers_size = 3;
   int numberofPlayers = 0;
-  playerData * arrayofPlayers = new playerData[arrayofPlayers_size];
+  playerData *arrayofPlayers = new playerData[arrayofPlayers_size];
   int currentplayer = 0;
+  bool userfinished = false;
 
   string playerCards[15], dealerCards[15] = {}; // make array of user cards and dealer cards
 
@@ -97,7 +98,7 @@ int main(){
     }
     else if(loadgame =='N'){
       system("clear");
-      addUser( arrayofPlayers, numberofPlayers);
+      numberofPlayers = addUser(arrayofPlayers, numberofPlayers, arrayofPlayers_size);
       currentplayer = numberofPlayers;
       break;
     }
@@ -119,6 +120,7 @@ int main(){
     system("clear");
     bool continueLoop = true;
     while (continueLoop){ // get the bet amount
+      cout << char(27) << "[1m" << "Welcome " << arrayofPlayers[currentplayer].name << char(27) << "[0m" << endl;
       cout << char(27) << "[1m" << "How much do you want to bet this round? Please enter a positive integer" << char(27) << "[0m" << endl;
       cout << char(27) << "[1m" << "Current wallet balance: " << wallet << char(27) << "[0m" << endl;
       cin >> currentBet;
@@ -170,11 +172,12 @@ int main(){
     dealerScore = readScore(dealerCards);
     system("clear");
     blackjack = false;
+    userfinished = false;
 
-    // ------CHECK FOR BLACJACK--------------------------
+    // ------CHECK FOR BLACKJACK--------------------------
     if (readScore(playerCards) == 21){
       cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore); //Prints table for user visual appeal
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore,userfinished); //Prints table for user visual appeal
       cout << char(27) << "[1m" << "You have blackjack! You win automatically!" << char(27) << "[0m" << endl;
       didYouWin = true;
       blackjack = true;
@@ -188,22 +191,23 @@ int main(){
       bool continueUserTurn = true;
       bool doubleCheck = false;
       cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
-      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+      printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore,userfinished);
       while (continueUserTurn){ // user turn continues until function returns false
         continueUserTurn = user(playerCards,deck,topCardIndex,userScore, currentBet, wallet, doubleCheck);
         system("clear");
         cout << char(27) << "[1m" << "                           USER'S TURN                                 " << char(27) << "[0m" << endl;
-        printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+        printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore,userfinished);
         if (doubleCheck) cout << endl << char(27) << "[1m" << "Due to insufficient funds, you can not double your bet. Hence your move counts as a Hit" << char(27) << "[0m" << endl << endl;
         doubleCheck = false;
       }
 
       cout << endl << char(27) << "[1m" << "Your turn is over." << endl << endl << "Enter any key to continue to Dealer's turn: " << char(27) << "[0m" << endl;
+      userfinished = true;
       string anyKey;
       cin >> anyKey;
 
       // -------DEALER MOVE -----------------------
-      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore, wallet,currentBet, playerCards);
+      dealer(dealerCards, deck, topCardIndex, dealerScore, userScore, wallet,currentBet, playerCards, userfinished);
     }
 
     // ------- Check winner -----------------------

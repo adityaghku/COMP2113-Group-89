@@ -25,12 +25,12 @@ Outputs:
   - prints the game board onto the console
   - returns arbitiary 0 values when to exit function
 */
-int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int &dealerScore, int userScore, int wallet,int currentBet, std::string playerCards[15]){
+int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int &dealerScore, int userScore, int wallet,int currentBet, std::string playerCards[15], bool userfinished){
   // if user has 21 or above, then dealer's turn is over
   if (userScore > 21)  {
     system("clear");
     cout << char(27) << "[1m" << "                          DEALER'S TURN                                " << char(27) << "[0m" << endl;
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore, userfinished);
     cout << char(27) << "[1m" << "Dealer automatically wins because you went bust!" << char(27) << "[0m" << endl;
     return 0;
   }
@@ -38,7 +38,7 @@ int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int 
   else if (readScore(dealerCards) > 17) {
     system("clear");
     cout << char(27) << "[1m" << "                          DEALER'S TURN                                " << char(27) << "[0m" << endl;
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore,userfinished);
     return 0;
   }
 
@@ -50,7 +50,7 @@ int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int 
     dealerCards[findNumberofCards(dealerCards)] = deck[topCardIndex];
     topCardIndex += 1;
     dealerScore = readScore(dealerCards);
-    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore);
+    printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore, userfinished);
 
   }
 

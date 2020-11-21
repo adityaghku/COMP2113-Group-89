@@ -43,22 +43,22 @@ int load_data(playerData * &arrayofPlayers, int &arrayofPlayers_size){
   int i = 0;
   string line;
   while (getline(fin, line)){
-  if (i >= arrayofPlayers_size)
-    grow_file(arrayofPlayers, arrayofPlayers_size);
+    if (i >= arrayofPlayers_size - 1)
+      grow_file(arrayofPlayers, arrayofPlayers_size);
 
-  // extract information from line
-  if (i < arrayofPlayers_size) {
-        istringstream iss(line);
-        if (!getline(iss, arrayofPlayers[i].name,','))
-            break;
-        string temp;
-        if (getline(iss, temp,','))
+    // extract information from line
+    if (i < arrayofPlayers_size) {
+          istringstream iss(line);
+          if (!getline(iss, arrayofPlayers[i].name,','))
+              break;
+          string temp;
+          if (getline(iss, temp,','))
 
-            arrayofPlayers[i].wallet = stoi(temp);
+              arrayofPlayers[i].wallet = stoi(temp);
 
-        if (!getline(iss, arrayofPlayers[i].key))
-            break;
-        ++i;
+          if (!getline(iss, arrayofPlayers[i].key))
+              break;
+          ++i;
     }
   }
 
@@ -87,8 +87,12 @@ void grow_file(playerData * &arrayofPlayers, int &arrayofPlayers_size){
 	return;
 }
 
-int addUser(playerData arrayofPlayers[], int numberofPlayers)
+int addUser(playerData arrayofPlayers[], int numberofPlayers, int arrayofPlayers_size)
 {
+  if (numberofPlayers >= arrayofPlayers_size) {
+    grow_file(arrayofPlayers, arrayofPlayers_size);
+  }
+
 	char ans;
 	string str;
 

@@ -11,7 +11,7 @@ Inputs:
 Outputs:
   - y:
 */
-void printDealerCards(int n, string dealerCards[15]){
+void printDealerCards(int n, string dealerCards[15], bool userfinished){
   int l = 34 - 7*(n-1);
 
   for (int i = 0; i < n; i++){
@@ -29,20 +29,45 @@ void printDealerCards(int n, string dealerCards[15]){
       char temp;
       temp = dealerCards[i][0];
       if (temp=='1'){
-        cout << "|" << setw(30) << "|" << dealerCards[i] << " |" << " ";
+        cout << "|" << setw(30) << "|";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << " |" << " ";
+        }
+        else{
+          cout << "    |" << " ";
+        }
       }
       else{
-        cout << "|" << setw(30) << "|" << dealerCards[i] << "  |" << " ";
+        cout << "|" << setw(30) << "|";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "  |" << " ";
+        }
+        else{
+          cout << "    |" << " ";
+        }
       }
     }
     else{
       char temp;
       temp = dealerCards[i][0];
       if (temp=='1'){
-        cout << "|" << dealerCards[i] << " |" << " ";
+        cout << "|";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << " |" << " ";
+        }
+        else{
+          cout << "    |" << " ";
+        }
+
       }
       else{
-        cout << "|" << dealerCards[i] << "  |" << " ";
+        cout << "|";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "  |" << " ";
+        }
+        else{
+          cout << "    |" << " ";
+        }
       }
     }
   }
@@ -63,20 +88,46 @@ void printDealerCards(int n, string dealerCards[15]){
       char temp;
       temp = dealerCards[i][0];
       if (temp=='1'){
-        cout << "|" << setw(30) << "|" << " " << dealerCards[i] << "|" << " ";
+        cout << "|" << setw(30) << "|" << " ";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "|" << " ";
+        }
+        else{
+          cout << "   |" << " ";
+        }
       }
       else{
-        cout << "|" << setw(30) << "|" << "  " << dealerCards[i] << "|" << " ";
+        cout << "|" << setw(30) << "|" << "  ";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "|" << " ";
+        }
+        else{
+          cout << "   |" << " ";
+        }
+
       }
     }
     else{
       char temp;
       temp = dealerCards[i][0];
       if (temp=='1'){
-        cout << "|" << " " << dealerCards[i] << "|" << " ";
+        cout << "|" << " ";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "|" << " ";
+        }
+        else{
+          cout << "   |" << " ";
+        }
       }
       else{
-        cout << "|" << "  " << dealerCards[i] << "|" << " ";
+        cout << "|" << "  ";
+        if(userfinished || i==0 ){
+          cout << dealerCards[i] << "|" << " ";
+        }
+        else{
+          cout << "  |" << " ";
+        }
+
       }
     }
   }

@@ -15,12 +15,12 @@ Inputs:
 Outputs:
   - y:
 */
-void printBoard(int wallet,int currentBet, string playerCards[15], string dealerCards[15], int playerCardsSize, int dealerCardsSize,int userScore, int dealerScore){
+void printBoard(int wallet,int currentBet, string playerCards[15], string dealerCards[15], int playerCardsSize, int dealerCardsSize,int userScore, int dealerScore, bool userfinished){
   cout << setfill('-') << setw(72) << " " << endl;
   cout << setfill(' ');
 
   cout << "|" << setw(70) << "|" << endl;
-  printDealerCards(dealerCardsSize, dealerCards);
+  printDealerCards(dealerCardsSize, dealerCards, userfinished);
   cout << "|" << setw(70) << "|" << endl;
 
   cout << "|" << "                     Dealers Score: " << dealerScore;
