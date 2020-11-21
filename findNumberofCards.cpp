@@ -15,9 +15,12 @@ Outputs:
 */
 
 int findNumberofCards(string cards[]){
+
   int numberofCards = 0;
+
   while (!(cards[numberofCards].empty())) {
     numberofCards++;
   }
+  
   return numberofCards;
 }

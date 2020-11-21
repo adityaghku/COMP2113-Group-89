@@ -35,7 +35,8 @@ int dealer(std::string dealerCards[], std::string deck[], int &topCardIndex,int 
     return 0;
   }
 
-  else if (readScore(dealerCards) > 17) {
+  //dealer cannot hit if the score is less than 17
+  else if (readScore(dealerCards) >= 17) {
     system("clear");
     cout << char(27) << "[1m" << "                          DEALER'S TURN                                " << char(27) << "[0m" << endl;
     printBoard(wallet,currentBet, playerCards, dealerCards, findNumberofCards(playerCards), findNumberofCards(dealerCards),userScore,dealerScore,userfinished);

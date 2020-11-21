@@ -35,38 +35,30 @@ The game we have created is an electronic version of blackjack. In this game, th
     • We have used a combination of pass by reference vs pass by value to alter the game status as the game progresses.
     • There is  a centralized function which calls secondary functions to run the different parts of the game - for example, main() begins the game but printBoard() prints the cards and winner() evaluates winner.
     • A Deck array is used, and in each round the array is re-shuffled.
-    • --------SOMETHING ABOUT CLASSES WITH SAVE/LOAD------
+    • We have defined a class called playerData which holds the user data and appends it to a .txt file
 ### 3. Dynamic memory management
-    • Pointers and Dynamic Memory Management will be used primarily in the operations relating to the deck.
-    • The deck values are  stored in an array which are retrieved using pointers.
-    • Pass by values are used to alter the game status. For example, wallet (cash available to user) is updated depending on a win or a loss using pass by reference to a function called winner().
+    • Pointers and Dynamic Memory Management will be used primarily for the save load functionality.
+    • A dynamic array of the player data is created that can be updated and expanded when players are added
 ### 4. File input/output (e.g., for loading/saving game status)
-    • Each new user is given a random alphanumeric code of 6 digits which serves as their ‘key’.
+    • Each new user is given a random code of 6 alphabets which serves as their ‘key’.
     • The game autosaves after each round.
     • A user can play the game, then quit the game, and then load the game by relaunching the game and inputting their original ‘key’.
 ### 5. Program codes in multiple files
-    • The program code will be separated into multiple front end and back end files of .h and .cpp. Examples include winner.h, winner.cpp, user.h, and user.cpp.
-    • We will use makefile to link up the relevant file dependencies based on how the files are divided in the final project.
+    • The program code has been separated into multiple front end and back end files of .h and .cpp. Examples include winner.h, winner.cpp, user.h, and user.cpp.
+    • We have used makefile to link the files and allow compilation of them.
 
 ### C/C++ Libraries used
-#### iostream
-    •
+
 #### unistd
     • For creating time delay when dealer draws cards
-#### string
-    • For using string types
-#### iomanip
-    • ??
 #### random
-    •  ??
+    • Used to create random key
 #### sstream
-    • ??
+    • Allow input and manipulation of strings for save/load functions
 #### stdlib
     • For random number generation
 #### ctime
     • For random number generation
-####
-    •  
 
 
 ### Compilation and Execution Instructions

@@ -11,7 +11,7 @@ Inputs:
 Outputs:
   - instructions of the game
 */
-void displayInstructions(){
+void displayInstructions() {
   cout << endl;
   cout << "Blackjack is a game where the player plays against the dealer, choosing their own bet amount to try and win as much money as possible against the casino." << endl << endl;
   cout << char(27) << "[1m" << "Game Rules:" << char(27) << "[0m" << endl << endl;

@@ -22,13 +22,29 @@ Outputs:
   - a boolean which is false if this is the user's last move, and true otherwise
 */
 bool user(string playerCards[], string deck[], int &topCardIndex,int &userScore, int &currentBet, int &wallet, bool &doubleCheck){
-  cout << char(27) << "[1m" << "Your moves:" << char(27) << "[0m" << endl<< endl;
-  cout<< char(27) << "[1m" << " [H]it: Draw another card" << endl << " [D]ouble: Double initial bet and draw one last card" << endl << " [S]tand: End turn" << endl << endl << "What's the move? " << char(27) << "[0m";
 
   char userMove;
-  cin >> userMove;
+
+  while (true){
+
+    cout << char(27) << "[1m" << "Your moves:" << char(27) << "[0m" << endl<< endl;
+    cout<< char(27) << "[1m" << " [H]it: Draw another card" << endl << " [D]ouble: Double initial bet and draw one last card" << endl << " [S]tand: End turn" << endl << endl << "What's the move? " << char(27) << "[0m";
+
+
+    cin >> userMove;
+
+    if (userMove == 'S' || userMove == 'D' || userMove == 'H'){
+      break;
+    }
+    else{
+      cout << "Invalid Input" << endl;
+    }
+  }
+
   cout << endl;
+
   if (userMove == 'S') return false;
+
   else{ // if not Stand then must be Hit or Double --> must draw an additional card
     playerCards[findNumberofCards(playerCards)] = deck[topCardIndex];
     topCardIndex += 1;
