@@ -1,3 +1,5 @@
+This is a game as part of a group project for an introductory programming course in C++ and C at HKU. 
+
 # Group 89
 ## Aditya Gupta - 3035662297 & Aayush Batwara - 3035660433
 
